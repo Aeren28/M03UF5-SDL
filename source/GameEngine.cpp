@@ -48,9 +48,9 @@ void GameEngine::Update() {
 	while (true) {
 		//Update Logic
 
-
+		
 		//Render						  R    G    B
-		SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); //background color
+		SDL_SetRenderDrawColor(renderer,rand()%255, rand() % 255, rand() % 255, 255); //background color
 
 		SDL_RenderClear(renderer);
 

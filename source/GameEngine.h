@@ -2,6 +2,7 @@
 #include <SDL.h>
 
 #include <iostream>
+#include <stdlib.h>
 
 class GameEngine {
 
