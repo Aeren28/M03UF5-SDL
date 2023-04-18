@@ -45,6 +45,8 @@ void GameEngine::InitWindowAndRenderer(int windowWidth, int windowHeight) {
 
 void GameEngine::Update() {
 
+	GameObject object(renderer);
+
 	bool quitGame = false;
 
 	while (!quitGame) {
@@ -62,14 +64,16 @@ void GameEngine::Update() {
 		}
 
 		//Update Logic
-
-		
+		object.Update(0.f);
+				
 		//Render					     R    G    B
 		SDL_SetRenderDrawColor(renderer, 150, 0, 150, 255); //background color
 
 		SDL_RenderClear(renderer);
 
 		//Render objects
+		object.Render(renderer);
+
 		//SDL_RenderCopyex(...)
 
 		SDL_RenderPresent(renderer);

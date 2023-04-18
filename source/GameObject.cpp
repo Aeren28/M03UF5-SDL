@@ -27,3 +27,13 @@ GameObject::GameObject(SDL_Renderer* renderer) {
 	SDL_FreeSurface(surf);
 
 }
+
+void GameObject::Update(float dt) {
+
+}
+
+void GameObject::Render(SDL_Renderer* renderer) {
+
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+
+}
