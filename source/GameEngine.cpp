@@ -45,12 +45,27 @@ void GameEngine::InitWindowAndRenderer(int windowWidth, int windowHeight) {
 
 void GameEngine::Update() {
 
-	while (true) {
+	bool quitGame = false;
+
+	while (!quitGame) {
+		//Update Input
+		SDL_Event e;
+
+		while (SDL_PollEvent(&e) != 0) {
+
+			if (e.type == SDL_QUIT) {
+
+				quitGame = true;
+
+			}
+
+		}
+
 		//Update Logic
 
 		
-		//Render						  R    G    B
-		SDL_SetRenderDrawColor(renderer,rand()%255, rand() % 255, rand() % 255, 255); //background color
+		//Render					     R    G    B
+		SDL_SetRenderDrawColor(renderer, 150, 0, 150, 255); //background color
 
 		SDL_RenderClear(renderer);
 
