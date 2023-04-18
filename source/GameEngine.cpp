@@ -74,6 +74,7 @@ void GameEngine::Update() {
 		//Render objects
 		object.Render(renderer);
 
+		
 		//SDL_RenderCopyex(...)
 
 		SDL_RenderPresent(renderer);
