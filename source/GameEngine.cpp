@@ -42,3 +42,30 @@ void GameEngine::InitWindowAndRenderer(int windowWidth, int windowHeight) {
 	}
 
 }
+
+void GameEngine::Update() {
+
+	while (true) {
+		//Update Logic
+
+
+		//Render						  R    G    B
+		SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); //background color
+
+		SDL_RenderClear(renderer);
+
+		//Render objects
+		//SDL_RenderCopyex(...)
+
+		SDL_RenderPresent(renderer);
+
+	}
+
+}
+
+void GameEngine::Finish() {
+
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+
+}
