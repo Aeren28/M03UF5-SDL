@@ -30,6 +30,7 @@ public:
 	int GetMouseX() { return mouseX; }
 	int GetMouseY() { return mouseY; }
 	bool GetLeftClick() { return leftClick; }
+	bool GetQuit() { return quit; }
 
 private:
 	

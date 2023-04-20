@@ -47,29 +47,17 @@ void GameEngine::Update() {
 
 	GameObject object(renderer);
 
-	bool quitGame = false;
-
-	while (!quitGame) {
+	while (!IM.GetQuit()) {
 		//Update Input
-		SDL_Event e;
-
-		while (SDL_PollEvent(&e) != 0) {
-
-			if (e.type == SDL_QUIT) {
-
-				quitGame = true;
-
-			}
-
-		}
-
-		IM;
+		IM.Listen();
 
 		//Update Logic
 		object.Update(0.f);
 				
 		//Render					     R    G    B
-		SDL_SetRenderDrawColor(renderer, 150, 0, 150, 255); //background color
+		
+		if(IM.GetKey(SDLK_SPACE, DOWN))
+			SDL_SetRenderDrawColor(renderer, rand() % 150, rand() %  155, rand() %  150, 255); //background color
 
 		SDL_RenderClear(renderer);
 
