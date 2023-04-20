@@ -57,7 +57,7 @@ void GameEngine::Update() {
 
 	gameScenes["Main Menu"] = new MenuScene();
 	gameScenes["Gameplay"] = new GameplayScene();
-	//gameScenes["Highscores"] = new HighscoreScene();
+	gameScenes["Highscore"] = new HighscoreScene();
 
 	Scene* currentScene = gameScenes["Main Menu"];
 

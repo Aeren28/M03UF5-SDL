@@ -14,6 +14,12 @@ void GameplayScene::Update(float dt) {
 		targetScene = "Main Menu";
 	}
 
+	if (IM.GetKey(SDLK_b, DOWN)) {
+		//Transition code
+		finished = true;
+		targetScene = "Highscore";
+	}
+
 }
 
 void GameplayScene::Render(SDL_Renderer* rend) {
