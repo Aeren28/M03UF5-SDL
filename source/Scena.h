@@ -6,7 +6,7 @@
 class Scene {
 
 public:
-	Scene();
+	Scene() = default;
 
 	virtual void Start() = 0;
 
@@ -17,11 +17,14 @@ public:
 
 	virtual void Render(SDL_Renderer* rend) {
 		for (auto it = objects.begin(); it != objects.end(); it++)
-			it->Render(rend)
+			it->Render(rend);
 	}
 
 	virtual void Exit() = 0;
 
-private:
+protected:
 	std::vector<GameObject>objects;
+
+	bool finished = false;
+	std::string targetScene;
 };

@@ -45,16 +45,24 @@ void GameEngine::InitWindowAndRenderer(int windowWidth, int windowHeight) {
 
 void GameEngine::Update() {
 
-	GameObject object(renderer);
-
+	//---- TIME CONTROL
 	float dt = 0.0f;
 	float lastTime = (double)SDL_GetPerformanceCounter() / (double)SDL_GetPerformanceFrequency();
 	
 	const int FPS = 60;
 	const float frameTime = 1.0f / (float)FPS;
 
-	while (!IM.GetQuit()) {
+	//---- SCENES
+	std::unordered_map<std::string, Scene*> gameScenes;
 
+	gameScenes["Main Menu"] = new MenuScene();
+	gameScenes["Gameplay"] = new GameplayScene();
+	gameScenes["Highscores"] = new HighscoreScene();
+
+	Scene* currentScene = gameScenes["Main Menu"];
+
+	while (!IM.GetQuit()) {
+		// ---- DELTA TIME CONTROL
 		float currentTime = (double)SDL_GetPerformanceCounter() / (double)SDL_GetPerformanceFrequency();
 		dt += currentTime - lastTime;
 		lastTime = currentTime;
@@ -65,8 +73,7 @@ void GameEngine::Update() {
 			IM.Listen();
 
 			//Update Logic
-			object.Update(dt);
-			std::cout << dt << std::endl;
+			currentScene->Update(dt);
 
 			//Render					                 R    G    B
 
@@ -76,7 +83,7 @@ void GameEngine::Update() {
 			SDL_RenderClear(renderer);
 
 			//Render objects
-			object.Render(renderer);
+			currentScene->Render(renderer);
 
 
 			//SDL_RenderCopyex(...)
