@@ -8,13 +8,7 @@ void HighscoreScene::Start() {
 void HighscoreScene::Update(float dt) {
 	Scene::Update(dt);
 
-	if (IM.GetKey(SDLK_b, DOWN)) {
-		//Transition code
-		finished = true;
-		targetScene = "Gameplay";
-	}
-
-	if (IM.GetKey(SDLK_a, DOWN)) {
+	if (IM.GetKey(SDLK_SPACE, DOWN)) {
 		//Transition code
 		finished = true;
 		targetScene = "Main Menu";
