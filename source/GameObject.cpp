@@ -8,7 +8,7 @@ GameObject::GameObject(SDL_Renderer* renderer) {
 	rotation = 0.f;
 
 	//Load the texture
-	SDL_Surface* surf = IMG_Load("resources/gato.jpg");
+	SDL_Surface* surf = IMG_Load("resources/logo.png");
 
 	if (surf == nullptr) {
 
@@ -42,6 +42,6 @@ void GameObject::Render(SDL_Renderer* renderer) {
 	SDL_Rect destination{ position.x, position.y, //Position
 					source.w * scale.x , source.h * scale.y };
 	
-	SDL_RenderCopy(renderer, texture, NULL, &destination);
+	SDL_RenderCopy(renderer, texture, &source, &destination);
  
 }

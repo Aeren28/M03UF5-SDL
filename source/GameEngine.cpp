@@ -63,6 +63,8 @@ void GameEngine::Update() {
 
 		}
 
+		IM;
+
 		//Update Logic
 		object.Update(0.f);
 				
