@@ -1,8 +1,9 @@
 #include "GameplayScene.h"
 
-void GameplayScene::Start() {
-	Scene::Start();
+void GameplayScene::Start(SDL_Renderer* rend) {
+	Scene::Start(rend);
 
+	objects.push_back(new GameObject(rend));
 }
 
 void GameplayScene::Update(float dt) {
@@ -24,5 +25,12 @@ void GameplayScene::Render(SDL_Renderer* rend) {
 
 void GameplayScene::Exit() {
 
+	for (auto it = objects.begin(); it != objects.end(); it++) {
+
+		delete(*it);
+
+	}
+
+	objects.clear();
 
 }

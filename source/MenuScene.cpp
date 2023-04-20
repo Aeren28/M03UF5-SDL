@@ -1,7 +1,7 @@
 #include "MenuScene.h"
 
-void MenuScene::Start() {
-	Scene::Start(); //Parent function
+void MenuScene::Start(SDL_Renderer* rend) {
+	Scene::Start(rend); //Parent function
 
 }
 

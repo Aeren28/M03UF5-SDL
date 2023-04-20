@@ -8,7 +8,7 @@ GameObject::GameObject(SDL_Renderer* renderer) {
 	rotation = 0.f;
 
 	//Load the texture
-	SDL_Surface* surf = IMG_Load("resources/logo.png");
+	SDL_Surface* surf = IMG_Load("resources/asteroids_spritesheet.png");
 
 	if (surf == nullptr) {
 
@@ -28,20 +28,30 @@ GameObject::GameObject(SDL_Renderer* renderer) {
 
 }
 
+GameObject::~GameObject() {
+
+	SDL_DestroyTexture(texture);
+
+}
+
 void GameObject::Update(float dt) {
 
 }
 
 void GameObject::Render(SDL_Renderer* renderer) {
 
+	position = Vector2(100.0f, 100.0f);
+	rotation += 1.0f;
+
 	SDL_Rect source{ 0, 0,	   //Position
-					250/2, 300 //Size
+					31, 39     //Size
 	};
 
 	//                     x    y    w    h
-	SDL_Rect destination{ position.x, position.y, //Position
+	SDL_Rect destination{ position.x - (source.w * scale.x) / 2, position.y - (source.h * scale.y) / 2, //Position
 					source.w * scale.x , source.h * scale.y };
+
 	
-	SDL_RenderCopy(renderer, texture, &source, &destination);
+	SDL_RenderCopyEx(renderer, texture, &source, &destination, rotation, NULL, SDL_FLIP_NONE);
  
 }

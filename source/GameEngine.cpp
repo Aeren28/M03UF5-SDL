@@ -24,8 +24,8 @@ void GameEngine::InitWindowAndRenderer(int windowWidth, int windowHeight) {
      
 	window = SDL_CreateWindow("Serendipity",			//window name
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,	//window position
-		windowWidth, windowHeight,						//window size
-		SDL_WINDOW_SHOWN);                              //window will be shown by default
+		windowWidth, windowHeight,						    //window size
+		SDL_WINDOW_SHOWN);                            //window will be shown by default
 
 	if (window == nullptr) {
 
@@ -60,6 +60,7 @@ void GameEngine::Update() {
 	gameScenes["Highscore"] = new HighscoreScene();
 
 	Scene* currentScene = gameScenes["Main Menu"];
+	currentScene->Start(renderer);
 
 	while (!IM.GetQuit()) {
 		// ---- DELTA TIME CONTROL
@@ -88,7 +89,7 @@ void GameEngine::Update() {
 
 				currentScene->Exit();
 				currentScene = gameScenes[currentScene->GetTargetScene()];
-				currentScene->Start();
+				currentScene->Start(renderer);
 
 			}
 

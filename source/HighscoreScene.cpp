@@ -1,7 +1,7 @@
 #include "HighscoreScene.h"
 
-void HighscoreScene::Start() {
-	Scene::Start();
+void HighscoreScene::Start(SDL_Renderer* rend) {
+	Scene::Start(rend);
 
 }
 
