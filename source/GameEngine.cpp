@@ -47,28 +47,44 @@ void GameEngine::Update() {
 
 	GameObject object(renderer);
 
+	float dt = 0.0f;
+	float lastTime = (double)SDL_GetPerformanceCounter() / (double)SDL_GetPerformanceFrequency();
+	
+	const int FPS = 60;
+	const float frameTime = 1.0f / (float)FPS;
+
 	while (!IM.GetQuit()) {
-		//Update Input
-		IM.Listen();
 
-		//Update Logic
-		object.Update(0.f);
-				
-		//Render					     R    G    B
-		
-		if(IM.GetKey(SDLK_SPACE, DOWN))
-			SDL_SetRenderDrawColor(renderer, rand() % 150, rand() %  155, rand() %  150, 255); //background color
+		float currentTime = (double)SDL_GetPerformanceCounter() / (double)SDL_GetPerformanceFrequency();
+		dt += currentTime - lastTime;
+		lastTime = currentTime;
 
-		SDL_RenderClear(renderer);
+		if (dt > frameTime) {
 
-		//Render objects
-		object.Render(renderer);
+			//Update Input
+			IM.Listen();
 
-		
-		//SDL_RenderCopyex(...)
+			//Update Logic
+			object.Update(dt);
+			std::cout << dt << std::endl;
 
-		SDL_RenderPresent(renderer);
+			//Render					                 R    G    B
 
+			if (IM.GetKey(SDLK_SPACE, DOWN))
+				SDL_SetRenderDrawColor(renderer, rand() % 150, rand() % 155, rand() % 150, 255); //background color
+
+			SDL_RenderClear(renderer);
+
+			//Render objects
+			object.Render(renderer);
+
+
+			//SDL_RenderCopyex(...)
+
+			SDL_RenderPresent(renderer);
+
+			dt -= frameTime;
+		}
 	}
 
 }
