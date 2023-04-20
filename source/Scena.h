@@ -8,7 +8,9 @@ class Scene {
 public:
 	Scene() = default;
 
-	virtual void Start() = 0;
+	virtual void Start() {
+		finished = false;
+	}
 
 	virtual void Update(float dt) {
 		for (auto it = objects.begin(); it != objects.end(); it++)
@@ -21,6 +23,9 @@ public:
 	}
 
 	virtual void Exit() = 0;
+
+	bool IsFinished() { return finished; }
+	std::string GetTargetScene() { return targetScene; }
 
 protected:
 	std::vector<GameObject>objects;

@@ -57,7 +57,7 @@ void GameEngine::Update() {
 
 	gameScenes["Main Menu"] = new MenuScene();
 	gameScenes["Gameplay"] = new GameplayScene();
-	gameScenes["Highscores"] = new HighscoreScene();
+	//gameScenes["Highscores"] = new HighscoreScene();
 
 	Scene* currentScene = gameScenes["Main Menu"];
 
@@ -75,20 +75,22 @@ void GameEngine::Update() {
 			//Update Logic
 			currentScene->Update(dt);
 
-			//Render					                 R    G    B
-
-			if (IM.GetKey(SDLK_SPACE, DOWN))
-				SDL_SetRenderDrawColor(renderer, rand() % 150, rand() % 155, rand() % 150, 255); //background color
-
+			//Render
 			SDL_RenderClear(renderer);
 
 			//Render objects
 			currentScene->Render(renderer);
 
-
-			//SDL_RenderCopyex(...)
-
 			SDL_RenderPresent(renderer);
+
+			//Scene transition
+			if (currentScene->IsFinished()) {
+
+				currentScene->Exit();
+				currentScene = gameScenes[currentScene->GetTargetScene()];
+				currentScene->Start();
+
+			}
 
 			dt -= frameTime;
 		}
