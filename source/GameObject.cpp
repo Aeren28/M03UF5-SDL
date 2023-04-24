@@ -39,7 +39,7 @@ void GameObject::Update(float dt) {
 }
 
 void GameObject::Render(SDL_Renderer* renderer) {
-
+/*
 	position = Vector2(100.0f, 100.0f);
 	rotation += 1.0f;
 
@@ -53,5 +53,5 @@ void GameObject::Render(SDL_Renderer* renderer) {
 
 	
 	SDL_RenderCopyEx(renderer, texture, &source, &destination, rotation, NULL, SDL_FLIP_NONE);
- 
+	*/
 }

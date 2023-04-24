@@ -97,6 +97,16 @@ void GameEngine::Update() {
 		}
 	}
 
+	currentScene->Exit();
+
+
+	//delete all scene
+	for (auto it = gameScenes.begin(); it != gameScenes.end(); it++) {
+
+		delete it->second;
+
+	}
+
 }
 
 void GameEngine::Finish() {

@@ -15,4 +15,8 @@ public:
 		return Vector2(x + other.x, y + other.y);
 	}
 
+	Vector2 operator* (float& other) {
+		return Vector2(x * other, y * other);
+	}
+
 };

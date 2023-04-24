@@ -12,10 +12,10 @@ public:
 	GameObject(SDL_Renderer* renderer);
 	~GameObject();
 
-	void Update(float dt);
-	void Render(SDL_Renderer* renderer);
+	virtual void Update(float dt) = 0;
+	virtual void Render(SDL_Renderer* renderer) = 0;
 
-private:
+protected:
 	Vector2 position;
 	Vector2 scale;
 

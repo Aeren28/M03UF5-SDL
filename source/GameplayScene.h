@@ -1,6 +1,6 @@
 #pragma once
 #include "Scena.h"
-#include "InputManager.h"
+#include "Spaceship.h"
 
 class GameplayScene : public Scene {
 
