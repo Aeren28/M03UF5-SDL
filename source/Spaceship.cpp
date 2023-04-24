@@ -17,7 +17,23 @@ void Spaceship::Update(float dt) {
 
 void Spaceship::UpdateMovement(float dt) {
 
-	velocity = Vector2(10, 10); //Unidades: pixeles/s
+	if (IM.GetKey(SDLK_UP, HOLD) || IM.GetKey(SDLK_UP, DOWN)) {
+		Vector2 dir;
+		float rotationInRadiants = rotation * (M_PI / 180.f);
+		
+		dir.x = cos(rotationInRadiants);
+		dir.y = sin(rotationInRadiants);
+  
+		velocity = velocity + (dir * dt * 50.0f);   //Unidades: pixeles/s
+	}
+
+	if (IM.GetKey(SDLK_RIGHT, HOLD) || IM.GetKey(SDLK_RIGHT, DOWN)) {
+		rotation += dt * 100; //Units: º/s
+	
+	}
+	else if (IM.GetKey(SDLK_LEFT, HOLD) || IM.GetKey(SDLK_LEFT, DOWN)) {
+		rotation -= dt * 100;
+	}
 
 	Vector2 velocityDT = velocity * dt;
 	position = position + velocityDT;
@@ -40,7 +56,7 @@ void Spaceship::Render(SDL_Renderer* rend) {
 
 	SDL_RenderCopyEx(rend, texture, 
 		&source, &dest,
-		rotation, 
+		90.0f + rotation, 
 		NULL,           //Punto de rotación: NULL = centrado
 		SDL_FLIP_NONE );      //NO hacemos flip de la imagen
 
