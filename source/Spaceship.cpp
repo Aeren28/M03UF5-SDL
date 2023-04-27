@@ -1,7 +1,7 @@
 #include "Spaceship.h"
 
 Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl) 
-	: GameObject(renderer) {
+	: GameObject(renderer, 31, 39) {
 	
 	position = pos;
 	rotation = rot;
@@ -16,7 +16,7 @@ Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl
 	linearDrag = 1.0f;
 	angularDrag = 2.5;
 
-	accelerationFactor = 500.0f;		//Px  /sec^2
+	accelerationFactor = 200.0f;		//Px  /sec^2
 	angularAccelerationFactor = 18000.0f; //Degs/sec^2
 
 }
@@ -67,17 +67,23 @@ void Spaceship::UpdateMovement(float dt) {
 }
 
 void Spaceship::ClampPosition() {
-	if (position.x > GAME_WIDTH)
-		position.x -= GAME_WIDTH;
+	
+	float scaleWidth = (float)width * scale.x;
+	float scaleHeight = (float)height * scale.y;
 
-	if (position.x < 0.0f)
-		position.x += GAME_WIDTH;
+	int biggestAxis = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
 
-	if (position.y > GAME_HEIGHT)
-		position.y -= GAME_HEIGHT;
+	if (position.x > GAME_WIDTH + biggestAxis)
+		position.x -= (GAME_WIDTH + biggestAxis * 2);
 
-	if (position.y < 0.0f)
-		position.y += GAME_HEIGHT;
+	if (position.x < 0.0f - biggestAxis)
+		position.x += (GAME_WIDTH + biggestAxis * 2);
+
+	if (position.y > GAME_HEIGHT + biggestAxis)
+		position.y -= (GAME_HEIGHT + biggestAxis * 2);
+
+	if (position.y < 0.0f - biggestAxis)
+		position.y += (GAME_HEIGHT + biggestAxis * 2);
 }
 
 void Spaceship::Render(SDL_Renderer* rend) {
@@ -85,8 +91,8 @@ void Spaceship::Render(SDL_Renderer* rend) {
 	SDL_Rect source;
 	source.x = 0;
 	source.y = 0;
-	source.w = 31;
-	source.h = 39;
+	source.w = width;
+	source.h = height;
 
 	SDL_Rect dest;
 	dest.x = position.x - (int)((float)source.w * scale.x / 2.0f);

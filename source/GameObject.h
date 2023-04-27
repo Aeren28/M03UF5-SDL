@@ -10,7 +10,7 @@
 class GameObject {
 
 public:
-	GameObject(SDL_Renderer* renderer);
+	GameObject(SDL_Renderer* renderer, int w, int h);
 	~GameObject();
 
 	virtual void Update(float dt) = 0;
@@ -23,5 +23,6 @@ protected:
 	float rotation;
 	
 	SDL_Texture* texture;
+	int width, height;
 
 };

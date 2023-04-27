@@ -1,6 +1,7 @@
 #include "GameObject.h"
 
-GameObject::GameObject(SDL_Renderer* renderer) {
+GameObject::GameObject(SDL_Renderer* renderer, int w, int h)
+	:width(w), height(h) {
 
 	position = Vector2();
 	scale = Vector2(1.f, 1.f);
