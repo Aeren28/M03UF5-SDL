@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "Vector2.h"
+#include "Utils.h"
 
 class GameObject {
 
