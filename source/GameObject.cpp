@@ -1,7 +1,7 @@
 #include "GameObject.h"
 
-GameObject::GameObject(SDL_Renderer* renderer, int w, int h)
-	:width(w), height(h) {
+GameObject::GameObject(SDL_Renderer* renderer, int w, int h, Vector2 pad)
+	:width(w), height(h), padding(pad) {
 
 	position = Vector2();
 	scale = Vector2(1.f, 1.f);
@@ -60,8 +60,8 @@ void GameObject::UpdateMovement(float dt) {
 void GameObject::Render(SDL_Renderer* rend) {
 
 	SDL_Rect source;
-	source.x = 0;
-	source.y = 0;
+	source.x = padding.x;
+	source.y = padding.y;
 	source.w = width;
 	source.h = height;
 

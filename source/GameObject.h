@@ -10,7 +10,7 @@
 class GameObject {
 
 public:
-	GameObject(SDL_Renderer* renderer, int w, int h);
+	GameObject(SDL_Renderer* renderer, int w, int h, Vector2 pad);
 	~GameObject();
 
 	virtual void Update(float dt);
@@ -24,6 +24,7 @@ protected:
 	
 	SDL_Texture* texture;
 	int width, height;
+	Vector2 padding;
 
 	void ClampPosition();
 	virtual void UpdateMovement(float dt);
