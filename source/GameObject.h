@@ -13,8 +13,8 @@ public:
 	GameObject(SDL_Renderer* renderer, int w, int h);
 	~GameObject();
 
-	virtual void Update(float dt) = 0;
-	virtual void Render(SDL_Renderer* renderer) = 0;
+	virtual void Update(float dt);
+	virtual void Render(SDL_Renderer* renderer);
 
 protected:
 	Vector2 position;
@@ -24,5 +24,20 @@ protected:
 	
 	SDL_Texture* texture;
 	int width, height;
+
+	void ClampPosition();
+	virtual void UpdateMovement(float dt);
+
+	Vector2 velocity;
+	float angularVelocity;
+
+	Vector2 acceleration;
+	float angularAcceleration;
+
+	float linearDrag;
+	float angularDrag;
+
+	float accelerationFactor;
+	float angularAccelerationFactor;
 
 };

@@ -21,13 +21,6 @@ Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl
 
 }
 
-void Spaceship::Update(float dt) {
-
-	UpdateMovement(dt);
-	ClampPosition();
-
-}
-
 void Spaceship::UpdateMovement(float dt) {
 
 	acceleration = Vector2();
@@ -52,58 +45,5 @@ void Spaceship::UpdateMovement(float dt) {
 		angularAcceleration = dt * -angularAccelerationFactor;
 	}
 
-	//UPDATE VELOCITY AND ANGULAR VELOCITY
-	velocity = velocity + acceleration * dt;
-	angularVelocity = angularVelocity + angularAcceleration * dt;
-
-	//DRAG
-	velocity = velocity * (1.0 - linearDrag * dt);
-	angularVelocity = angularVelocity * (1.0 - angularDrag * dt);
-
-	//UPDATE POSITION AND ROTATION
-	position = position + velocity * dt;
-	rotation = rotation + angularVelocity * dt;
-
-}
-
-void Spaceship::ClampPosition() {
-	
-	float scaleWidth = (float)width * scale.x;
-	float scaleHeight = (float)height * scale.y;
-
-	int biggestAxis = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
-
-	if (position.x > GAME_WIDTH + biggestAxis)
-		position.x -= (GAME_WIDTH + biggestAxis * 2);
-
-	if (position.x < 0.0f - biggestAxis)
-		position.x += (GAME_WIDTH + biggestAxis * 2);
-
-	if (position.y > GAME_HEIGHT + biggestAxis)
-		position.y -= (GAME_HEIGHT + biggestAxis * 2);
-
-	if (position.y < 0.0f - biggestAxis)
-		position.y += (GAME_HEIGHT + biggestAxis * 2);
-}
-
-void Spaceship::Render(SDL_Renderer* rend) {
-
-	SDL_Rect source;
-	source.x = 0;
-	source.y = 0;
-	source.w = width;
-	source.h = height;
-
-	SDL_Rect dest;
-	dest.x = position.x - (int)((float)source.w * scale.x / 2.0f);
-	dest.y = position.y - (int)((float)source.h * scale.y / 2.0f);
-	dest.w = (float)source.w * scale.x;
-	dest.h= (float)source.h * scale.y;
-
-	SDL_RenderCopyEx(rend, texture, 
-		&source, &dest,
-		90.0f + rotation, 
-		NULL,           //Punto de rotación: NULL = centrado
-		SDL_FLIP_NONE );      //NO hacemos flip de la imagen
-
+	GameObject::UpdateMovement(dt);
 }

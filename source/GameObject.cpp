@@ -37,22 +37,64 @@ GameObject::~GameObject() {
 
 void GameObject::Update(float dt) {
 
+	UpdateMovement(dt);
+	ClampPosition();
+
 }
 
-void GameObject::Render(SDL_Renderer* renderer) {
-/*
-	position = Vector2(100.0f, 100.0f);
-	rotation += 1.0f;
+void GameObject::UpdateMovement(float dt) {
+	//UPDATE VELOCITY AND ANGULAR VELOCITY
+	velocity = velocity + acceleration * dt;
+	angularVelocity = angularVelocity + angularAcceleration * dt;
 
-	SDL_Rect source{ 0, 0,	   //Position
-					31, 39     //Size
-	};
+	//DRAG
+	velocity = velocity * (1.0 - linearDrag * dt);
+	angularVelocity = angularVelocity * (1.0 - angularDrag * dt);
 
-	//                     x    y    w    h
-	SDL_Rect destination{ position.x - (source.w * scale.x) / 2, position.y - (source.h * scale.y) / 2, //Position
-					source.w * scale.x , source.h * scale.y };
+	//UPDATE POSITION AND ROTATION
+	position = position + velocity * dt;
+	rotation = rotation + angularVelocity * dt;
 
-	
-	SDL_RenderCopyEx(renderer, texture, &source, &destination, rotation, NULL, SDL_FLIP_NONE);
-	*/
+}
+
+void GameObject::Render(SDL_Renderer* rend) {
+
+	SDL_Rect source;
+	source.x = 0;
+	source.y = 0;
+	source.w = width;
+	source.h = height;
+
+	SDL_Rect dest;
+	dest.x = position.x - (int)((float)source.w * scale.x / 2.0f);
+	dest.y = position.y - (int)((float)source.h * scale.y / 2.0f);
+	dest.w = (float)source.w * scale.x;
+	dest.h = (float)source.h * scale.y;
+
+	SDL_RenderCopyEx(rend, texture,
+		&source, &dest,
+		90.0f + rotation,
+		NULL,           //Punto de rotación: NULL = centrado
+		SDL_FLIP_NONE);      //NO hacemos flip de la imagen
+
+}
+
+void GameObject::ClampPosition() {
+
+	float scaleWidth = (float)width * scale.x;
+	float scaleHeight = (float)height * scale.y;
+
+	int biggestAxis = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
+
+	if (position.x > GAME_WIDTH + biggestAxis)
+		position.x -= (GAME_WIDTH + biggestAxis * 2);
+
+	if (position.x < 0.0f - biggestAxis)
+		position.x += (GAME_WIDTH + biggestAxis * 2);
+
+	if (position.y > GAME_HEIGHT + biggestAxis)
+		position.y -= (GAME_HEIGHT + biggestAxis * 2);
+
+	if (position.y < 0.0f - biggestAxis)
+		position.y += (GAME_HEIGHT + biggestAxis * 2);
 }
