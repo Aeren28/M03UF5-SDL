@@ -4,7 +4,9 @@ void GameplayScene::Start(SDL_Renderer* rend) {
 	Scene::Start(rend);
 
 	objects.push_back(new Spaceship(rend, Vector2(100.f, 100.f), 0.0f, Vector2(1.f, 1.f)));
-	objects.push_back(new Asteroid(rend));
+	
+	for(int i = 0; i < 10; i++)
+		objects.push_back(new Asteroid(rend));
 }
 
 void GameplayScene::Update(float dt) {

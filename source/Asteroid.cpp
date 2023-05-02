@@ -4,41 +4,29 @@ Asteroid::Asteroid(SDL_Renderer* rend)
 	: GameObject(rend, 40, 40, Vector2(40, 0)) {
 
 	//CALCULATE RADIUS
-	int r = width > height ? width / 2 : height / 2;
+	float radius = CalculateRadius(width, height);
 
-	float a = ((float)GAME_WIDTH / 2.f + (float)r);
-	a *= a; //power of two
-
-	float b = ((float)GAME_HEIGHT / 2.f + (float)r);
-	b *= b;
-
-	float h = sqrt(a + b);
-
-	//CALCULATE POSITION IN SPHERE PERIMETER WITH A GIVEN RADIUS	
-	Vector2 perimeterPosition;
-	float angle = rand() % 360;
-	angle *= M_PI / 180.0f; //DEG TO RAD
-	perimeterPosition.x = cos(angle) * h;
-	perimeterPosition.y = sin(angle) * h;
+	//CALCULATE POSITION IN SPHERE PERIMETER WITH A GIVEN RADIUS (h)
+	Vector2 perimeterPosition = CalculatePositionInRadius(radius);
 
 	//CLAMP TO  RECTANGLE WITH WIDTH AND HEIGHT
-	float halfHeight = (float)GAME_HEIGHT / 2.f + (float)r;
-	float halfWidth = (float)GAME_WIDTH / 2.f + (float)r;
+	float halfHeight = (float)GAME_HEIGHT / 2.f + (float)radius;
+	float halfWidth = (float)GAME_WIDTH / 2.f + (float)radius;
 
-	if (perimeterPosition.y < -halfHeight) // TOP clamp
-		perimeterPosition.y = -halfHeight;
-
-	if (perimeterPosition.y > halfHeight) //BOTTOM clamp
-		perimeterPosition.y = halfHeight;
-
-	if (perimeterPosition.x < -halfWidth) //LEFT clamp
-		perimeterPosition.x = -halfWidth;
+	perimeterPosition = ClamPositionToRectangle(perimeterPosition, halfWidth, halfHeight);
 	
-	if (perimeterPosition.x > halfWidth) //RIGHT clamp
-		perimeterPosition.x = halfWidth;
-
+	//TRANSFORM
 	position = perimeterPosition;
 	position = position + Vector2(halfWidth, halfHeight);
+	rotation = rand() % 360;
+	scale = Vector2(1.0f, 1.0f);
 
-	velocity = Vector2(100, 100);
+	//PHYSICS
+	acceleration = Vector2(0.0f, 0.0f);
+	angularAcceleration = 0.0f;
+	linearDrag = 0.0f;
+	angularDrag = 0.0f;
+
+	velocity = CalculatePositionInRadius(100);
+	angularVelocity = 100 - (rand()% 201);
 }
