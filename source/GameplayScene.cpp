@@ -4,6 +4,7 @@ void GameplayScene::Start(SDL_Renderer* rend) {
 	Scene::Start(rend);
 
 	objects.push_back(new Spaceship(rend, Vector2(100.f, 100.f), 0.0f, Vector2(1.f, 1.f)));
+	objects.push_back(new Asteroid(rend));
 }
 
 void GameplayScene::Update(float dt) {
@@ -11,9 +12,9 @@ void GameplayScene::Update(float dt) {
 
 	if (IM.GetKey(SDLK_SPACE, DOWN)) {
 		//Transition code
-		finished = true;
-		targetScene = "Main Menu";
+		objects[0]->Destroy();
 	}
+
 }
 
 void GameplayScene::Render(SDL_Renderer* rend) {

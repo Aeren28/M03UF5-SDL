@@ -16,16 +16,25 @@ public:
 	virtual void Update(float dt);
 	virtual void Render(SDL_Renderer* renderer);
 
+	virtual void Destroy() { pendingDestroy = true; }
+	bool IsPendingDestroy() { return pendingDestroy; }
+
 protected:
+
+	//FLAGS
+	bool pendingDestroy = false;
+
+	//TRANSFORM
 	Vector2 position;
 	Vector2 scale;
-
 	float rotation;
 	
+	//RENDER INFORMATION
 	SDL_Texture* texture;
 	int width, height;
 	Vector2 padding;
 
+	//PHYSICS MOVEMENT
 	void ClampPosition();
 	virtual void UpdateMovement(float dt);
 

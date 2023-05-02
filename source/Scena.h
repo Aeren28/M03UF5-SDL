@@ -14,6 +14,16 @@ public:
 	}
 
 	virtual void Update(float dt) {
+		for (int i = objects.size() - 1; i >= 0; i--) {
+
+			if (objects[i]->IsPendingDestroy()) {
+
+				delete objects[i];
+				objects.erase(objects.begin() + i);
+
+			}
+		}
+
 		for (auto it = objects.begin(); it != objects.end(); it++)
 			(* it)->Update(dt);
 	}
