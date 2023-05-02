@@ -6,13 +6,11 @@
 #define GAME_HEIGHT 500
 
 inline float CalculateRadius(int width, int height) {
-	
-	int r = width > height ? width / 2 : height / 2;
 
-	float a = ((float)GAME_WIDTH / 2.f + (float)r);
+	float a = ((float)GAME_WIDTH / 2.f);
 	a *= a; //power of two
 
-	float b = ((float)GAME_HEIGHT / 2.f + (float)r);
+	float b = ((float)GAME_HEIGHT / 2.f);
 	b *= b;
 
 	float h = sqrt(a + b); //this is the radius

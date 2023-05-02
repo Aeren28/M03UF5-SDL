@@ -3,15 +3,17 @@
 Asteroid::Asteroid(SDL_Renderer* rend)
 	: GameObject(rend, 40, 40, Vector2(40, 0)) {
 
+	float objectRadius = width > height ? width / 2 : height / 2;
+	
 	//CALCULATE RADIUS
-	float radius = CalculateRadius(width, height);
+	float radius = CalculateRadius(width + objectRadius * 2.0f, height + objectRadius  * 2.0f);
 
 	//CALCULATE POSITION IN SPHERE PERIMETER WITH A GIVEN RADIUS (h)
 	Vector2 perimeterPosition = CalculatePositionInRadius(radius);
 
 	//CLAMP TO  RECTANGLE WITH WIDTH AND HEIGHT
-	float halfHeight = (float)GAME_HEIGHT / 2.f + (float)radius;
-	float halfWidth = (float)GAME_WIDTH / 2.f + (float)radius;
+	float halfHeight = (float)GAME_HEIGHT / 2.f + (float)objectRadius;
+	float halfWidth = (float)GAME_WIDTH / 2.f + (float)objectRadius;
 
 	perimeterPosition = ClamPositionToRectangle(perimeterPosition, halfWidth, halfHeight);
 	

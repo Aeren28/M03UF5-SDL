@@ -14,4 +14,7 @@ public:
 	void Render(SDL_Renderer* rend) override;
 	void Exit() override;
 
+private:
+	Spaceship* spaceship;
+
 };

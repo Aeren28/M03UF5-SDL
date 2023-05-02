@@ -19,6 +19,8 @@ public:
 	virtual void Destroy() { pendingDestroy = true; }
 	bool IsPendingDestroy() { return pendingDestroy; }
 
+	Vector2 GetPosition() { return position; }
+
 protected:
 
 	//FLAGS
