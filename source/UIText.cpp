@@ -33,4 +33,5 @@ void UIText::GenerateTexture(SDL_Renderer* rend) {
 
 	SDL_FreeSurface(surf);
 	TTF_CloseFont(font);
+
 }
