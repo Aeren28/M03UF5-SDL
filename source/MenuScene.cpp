@@ -2,6 +2,19 @@
 
 void MenuScene::Start(SDL_Renderer* rend) {
 	Scene::Start(rend); //Parent function
+	uiObjects.push_back(
+		new UIImage(
+			rend,
+			Vector2(100, 100), 0.0f, Vector2(1, 1),
+			"resources/logo.png",
+			255, 255, Vector2(0,0)));
+
+	uiObjects.push_back(
+		new UIText(
+			rend,
+			Vector2(250, 250), 0.0f, Vector2(1.f, 1.f),
+			"Serendipity",
+			"resources/Hyperspace.ttf"));
 
 }
 

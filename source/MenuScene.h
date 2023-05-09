@@ -1,5 +1,7 @@
 #pragma once
 #include "Scena.h"
+#include "UIImage.h"
+#include "UIText.h"
 
 class MenuScene : public Scene {
 

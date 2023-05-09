@@ -12,6 +12,8 @@ public:
 		width = w;
 		height = h;
 		padding = pad;
+
+		GenerateTexture(rend);
 	}
 
 	void Update(float dt) override {}
