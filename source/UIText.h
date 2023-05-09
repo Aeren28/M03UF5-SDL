@@ -8,12 +8,17 @@ class UIText : public UIObject {
 public:
 
 	UIText(SDL_Renderer* rend, Vector2 pos, float rot, Vector2 scl, std::string txt, std:: string path)
-		: UIObject(rend, pos, rot, scl), text(txt), fontPath(path) {
+		: UIObject(rend, pos, rot, scl), text(txt), fontPath(path), rend(rend) {
 		GenerateTexture(rend);
 	}
 
 	void Update(float dt) override {}
 	void Render(SDL_Renderer* rend) override;
+	void ChangeText(std::string newText) {
+		SDL_DestroyTexture(texture);
+		text = newText;
+		GenerateTexture(rend);
+	}
 
 protected:
 	
@@ -21,5 +26,7 @@ protected:
 
 	std::string text;
 	std::string fontPath;
+
+	SDL_Renderer* rend;
 
 };
