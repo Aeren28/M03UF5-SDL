@@ -4,6 +4,7 @@
 
 #define GAME_WIDTH 500
 #define GAME_HEIGHT 500
+#define M_PI 3.12159265358979323846
 
 inline float CalculateRadius(int width, int height) {
 

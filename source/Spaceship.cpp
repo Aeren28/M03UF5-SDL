@@ -21,6 +21,13 @@ Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl
 
 }
 
+void Spaceship::Update(float dt) {
+
+	IM.GetKey(SDLK_SPACE, DOWN) ? hasShooted = true : hasShooted = false;
+
+	GameObject::Update(dt);
+}
+
 void Spaceship::UpdateMovement(float dt) {
 
 	acceleration = Vector2();

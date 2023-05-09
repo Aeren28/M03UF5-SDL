@@ -20,6 +20,8 @@ public:
 	bool IsPendingDestroy() { return pendingDestroy; }
 
 	Vector2 GetPosition() { return position; }
+	float GetAngle() { return rotation * (M_PI / 180.0f); }
+	Vector2 GetVelocity() { return velocity; }
 
 protected:
 

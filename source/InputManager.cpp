@@ -29,6 +29,10 @@ void InputManager::Listen() {
 			break;
 
 		case SDL_KEYDOWN:
+			if (keys[e.key.keysym.sym] == HOLD) {
+				break;
+			}
+
 			keys [e.key.keysym.sym] = DOWN;
 
 			break;
