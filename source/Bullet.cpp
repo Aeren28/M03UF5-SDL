@@ -1,14 +1,12 @@
 #include "Bullet.h"
 
-Bullet::Bullet(SDL_Renderer* renderer, Vector2 pos, float angle)
+Bullet::Bullet(SDL_Renderer* renderer, Vector2 pos, float angle, float velocityFactor)
 	: GameObject(renderer, 10, 10, Vector2(32, 30)) {
 
 	Vector2 bulletSpawn = pos + (Vector2(cos(angle), sin(angle)) * 20);
 	position = bulletSpawn;
-	rotation = 0.0f;
-	scale = Vector2(1, 1);
 
-	velocity = (bulletSpawn - pos) * 30;
+	velocity = Vector2(cos(angle), sin(angle)) * velocityFactor;
 	angularVelocity = 0.0f;
 
 	acceleration = Vector2();
@@ -20,17 +18,22 @@ Bullet::Bullet(SDL_Renderer* renderer, Vector2 pos, float angle)
 	accelerationFactor = 0.0f;
 	angularAccelerationFactor = 0.0f;
 
+	lifeTime = 0.8;
+
 }
 
 void Bullet::Update(float dt) {
 
-	timeAlive += dt;
-
-	if (timeAlive > timeToLive) {
-		toDestroy = true;
-
-	}
-
 	GameObject::Update(dt);
+	UpdateLifeTime(dt);
+
+}
+
+void Bullet::UpdateLifeTime(float dt){
+
+	lifeTime -= dt;
+
+	if (lifeTime <= 0.0f)
+		Destroy();
 
 }

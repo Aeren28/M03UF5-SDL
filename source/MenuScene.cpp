@@ -13,9 +13,8 @@ void MenuScene::Start(SDL_Renderer* rend) {
 		new UIText(
 			rend,
 			Vector2(250, 250), 0.0f, Vector2(1.f, 1.f),
-			"Serendipity",
+			"ASTEROIDS",
 			"resources/Hyperspace.ttf"));
-
 }
 
 void MenuScene::Update(float dt) {

@@ -49,8 +49,9 @@ void GameplayScene::Update(float dt) {
 	}
 
 	//SPAWNERS
-	if (spaceship->HasShooted()) {
-		objects.push_back(new Bullet(rend, spaceship->GetPosition(), spaceship->GetAngle()));
+	if (spaceship != nullptr) {
+		if(spaceship->BulletShooted())
+			objects.push_back(new Bullet(rend, spaceship->GetPosition(), spaceship->GetAngle(), 650.f));
 
 	}
 
@@ -81,7 +82,7 @@ void GameplayScene::Update(float dt) {
 		//CAST OBJECTS TO BULLET
 		if (Bullet* b = dynamic_cast<Bullet*>(*it)) {
 			//CHECK IF BULLET HAS TO BE DESTROYED
-			if (b->ToDestroy())
+			if (b->IsPendingDestroy())
 				b->Destroy();
 
 		}
@@ -102,21 +103,20 @@ void GameplayScene::Update(float dt) {
 				//destroy asteroid
 			for (auto it = objects.begin(); it != objects.end(); it++) {
 
-				if (Asteroid* a = dynamic_cast<Asteroid*>(*it)) {
+				if (spaceship != nullptr) {
+					if (Asteroid* a = dynamic_cast<Asteroid*>(*it)) {
+						
+						Vector2 bulletToAsteroid = a->GetPosition() - b->GetPosition();
+						
+						float distanceSquared = bulletToAsteroid.x * bulletToAsteroid.x + bulletToAsteroid.y * bulletToAsteroid.y;
+						float squareRadiusSum = 5 + 20;				// bulletRadius + asteroidRadius
+						squareRadiusSum *= squareRadiusSum;
 
-					Vector2 bulletToAsteroid = a->GetPosition() - b->GetPosition();
-					float distanceSquared = bulletToAsteroid.x * bulletToAsteroid.x + bulletToAsteroid.y * bulletToAsteroid.y;
-					//bulletRadius + asteroidRadius
-					float squareRadiusSum = 5 + 20;
-
-					squareRadiusSum *= squareRadiusSum;
-
-					if (distanceSquared < squareRadiusSum) {
-						b->Destroy();
-						a->Destroy();
-
+						if (distanceSquared < squareRadiusSum) {
+							b->Destroy();
+							a->Destroy();
+						}
 					}
-
 				}
 
 			}

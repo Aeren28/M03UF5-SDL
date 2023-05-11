@@ -27,7 +27,7 @@ void GameEngine::InitSDL() {
 
 void GameEngine::InitWindowAndRenderer(int windowWidth, int windowHeight) {
      
-	window = SDL_CreateWindow("Serendipity",			//window name
+	window = SDL_CreateWindow("Asteroids",			//window name
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,	//window position
 		windowWidth, windowHeight,						    //window size
 		SDL_WINDOW_SHOWN);                            //window will be shown by default

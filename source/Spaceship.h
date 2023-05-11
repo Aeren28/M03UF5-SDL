@@ -9,13 +9,18 @@ public:
 	
 	Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl);
 
-	bool HasShooted() { return hasShooted; }
+	bool BulletShooted();
+	void Update(float dt) override;
 
 private:
 
-	bool hasShooted = false;
+	bool canShot;
+	bool wantsToShot;
+
+	float lastShotTime;
+	float maxShotTime;
 
 	void UpdateMovement(float dt) override;
-	void Update(float dt) override;
+	void UpdateShot(float dt);
 
 };

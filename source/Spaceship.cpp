@@ -19,13 +19,20 @@ Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl
 	accelerationFactor = 200.0f;		//Px  /sec^2
 	angularAccelerationFactor = 18000.0f; //Degs/sec^2
 
+
+	canShot = false;
+	wantsToShot = false;
+
+	maxShotTime = 0.25f;
+	lastShotTime = maxShotTime;
+
 }
 
 void Spaceship::Update(float dt) {
 
-	IM.GetKey(SDLK_SPACE, DOWN) ? hasShooted = true : hasShooted = false;
-
 	GameObject::Update(dt);
+	UpdateShot(dt);
+
 }
 
 void Spaceship::UpdateMovement(float dt) {
@@ -53,4 +60,27 @@ void Spaceship::UpdateMovement(float dt) {
 	}
 
 	GameObject::UpdateMovement(dt);
+}
+
+void Spaceship::UpdateShot(float dt) {
+
+	// Update Time
+	lastShotTime += dt;
+
+	// Can Shoot
+	canShot = lastShotTime >= maxShotTime;
+
+	// Wants to Shot
+	wantsToShot = IM.GetKey(SDLK_SPACE, DOWN) || IM.GetKey(SDLK_SPACE, HOLD);
+}
+
+bool Spaceship::BulletShooted() {
+
+	if (canShot && wantsToShot) {
+		lastShotTime = 0.0f;
+		return true;
+	}
+
+	return false;
+
 }
