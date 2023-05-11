@@ -42,5 +42,8 @@ void MenuScene::Render(SDL_Renderer* rend) {
 
 void MenuScene::Exit() {
 
+	for (auto it = uiObjects.begin(); it != uiObjects.end(); it++)
+		delete(*it);
+	uiObjects.clear();
 
 }

@@ -27,6 +27,8 @@ GameObject::GameObject(SDL_Renderer* renderer, int w, int h, Vector2 pad)
 
 	SDL_FreeSurface(surf);
 
+	radius = CalculateRadius(width, height);
+
 }
 
 GameObject::~GameObject() {

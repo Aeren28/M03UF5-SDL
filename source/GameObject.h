@@ -22,6 +22,7 @@ public:
 	Vector2 GetPosition() { return position; }
 	float GetAngle() { return rotation * (M_PI / 180.0f); }
 	Vector2 GetVelocity() { return velocity; }
+	float GetRadius() { return radius * (scale.x > scale.y ? scale.x : scale.y); }
 
 protected:
 
@@ -53,5 +54,7 @@ protected:
 
 	float accelerationFactor;
 	float angularAccelerationFactor;
+
+	float radius;
 
 };

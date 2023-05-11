@@ -25,17 +25,12 @@ void GameplayScene::Update(float dt) {
 
 	for (auto it = objects.begin(); it != objects.end(); it++) {
 		//CAST OBJECTS TO ASTEROID
-		if (Asteroid* a = dynamic_cast<BigAsteroid*>(*it)) {
+
+		if (Asteroid* a = dynamic_cast<Asteroid*>(*it)) {
 			asteroids++;
+
 		}
 
-		if (Asteroid* a = dynamic_cast<MediumAsteroid*>(*it)) {
-			asteroids++;
-		}
-
-		if (Asteroid* a = dynamic_cast<SmallAsteroid*>(*it)) {
-			asteroids++;
-		}
 	}
 
 	if (asteroids == 0) {
@@ -109,7 +104,7 @@ void GameplayScene::Update(float dt) {
 						Vector2 bulletToAsteroid = a->GetPosition() - b->GetPosition();
 						
 						float distanceSquared = bulletToAsteroid.x * bulletToAsteroid.x + bulletToAsteroid.y * bulletToAsteroid.y;
-						float squareRadiusSum = 5 + 20;				// bulletRadius + asteroidRadius
+						float squareRadiusSum = a->GetRadius() + b->GetRadius();    // bulletRadius + asteroidRadius
 						squareRadiusSum *= squareRadiusSum;
 
 						if (distanceSquared < squareRadiusSum) {
@@ -133,7 +128,7 @@ void GameplayScene::Update(float dt) {
 				//destroy spaceship
 			Vector2 spaceshipToAsteroid = a->GetPosition() - spaceship->GetPosition();
 			float distanceSquared = spaceshipToAsteroid.x * spaceshipToAsteroid.x + spaceshipToAsteroid.y * spaceshipToAsteroid.y;
-			float squaredRadiusSum = 20 + 20; //playerRadius + asteroidRadius
+			float squaredRadiusSum = a->GetRadius() + spaceship->GetRadius();	 //playerRadius + asteroidRadius
 			squaredRadiusSum *= squaredRadiusSum;
 
 			if (distanceSquared < squaredRadiusSum) {

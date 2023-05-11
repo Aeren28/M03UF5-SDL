@@ -6,7 +6,7 @@ Asteroid::Asteroid(SDL_Renderer* rend)
 	float objectRadius = width > height ? width / 2 : height / 2;
 	
 	//CALCULATE RADIUS
-	float radius = CalculateRadius(width + objectRadius * 2.0f, height + objectRadius  * 2.0f);
+	float radius = CalculateRadius(GAME_WIDTH, GAME_HEIGHT);
 
 	//CALCULATE POSITION IN SPHERE PERIMETER WITH A GIVEN RADIUS (h)
 	Vector2 perimeterPosition = CalculatePositionInRadius(radius);
