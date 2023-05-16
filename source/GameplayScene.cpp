@@ -3,11 +3,15 @@
 void GameplayScene::Start(SDL_Renderer* rend) {
 	
 	this->rend = rend;
+
+	currentState = GameplayState::ALIVE;
+
+	currentStateTime = 0.0f;
+	lifes = 3;
 	
 	Scene::Start(rend);
-
-	spaceship = new Spaceship(rend, Vector2(100.f, 100.f), 0.0f, Vector2(1.f, 1.f));
-	objects.push_back(spaceship);
+	
+	RespawnSpaceship();
 
 	for (int i = 0; i < rounds + 2; i++)
 		objects.push_back(new BigAsteroid(rend));
@@ -95,7 +99,6 @@ void GameplayScene::Update(float dt) {
 			}
 
 		}
-
 
 		//CAST OBJECT TO ASTEROID
 		if (Asteroid* a = dynamic_cast<Asteroid*>(*it)) {

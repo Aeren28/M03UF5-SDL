@@ -39,10 +39,3 @@ void MenuScene::Update(float dt) {
 		targetScene = "Highscore";
 	}
 }
-
-void MenuScene::Render(SDL_Renderer* rend) {
-	Scene::Render(rend); //Parent function
-
-	std::cout << "Main Menu" << std::endl;
-
-}
