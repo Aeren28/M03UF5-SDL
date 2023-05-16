@@ -133,6 +133,7 @@ void GameplayScene::Update(float dt) {
 
 			if (distanceSquared < squaredRadiusSum) {
 				spaceship->Destroy();
+				spaceship = nullptr;
 				a->Destroy();
 				finished = true;
 				targetScene = "Main Menu";
@@ -149,17 +150,5 @@ void GameplayScene::Render(SDL_Renderer* rend) {
 	Scene::Render(rend);
 
 	std::cout << "GamePlay" << std::endl;
-
-}
-
-void GameplayScene::Exit() {
-
-	for (auto it = objects.begin(); it != objects.end(); it++) {
-
-		delete(*it);
-
-	}
-
-	objects.clear();
 
 }

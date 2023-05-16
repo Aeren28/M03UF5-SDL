@@ -44,7 +44,18 @@ public:
 			(*it)->Render(rend);
 	}
 
-	virtual void Exit() = 0;
+	virtual void Exit() {
+
+		for (int i = objects.size() - 1; i >= 0; i--) {
+			delete objects[i];
+		}
+		for (int i = uiObjects.size() - 1; i >= 0; i--) {
+			delete uiObjects[i];
+		}
+
+		objects.clear();
+		uiObjects.clear();
+	}
 
 	bool IsFinished() { return finished; }
 	std::string GetTargetScene() { return targetScene; }
