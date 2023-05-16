@@ -7,6 +7,8 @@
 #include "SmallAsteroid.h"
 #include "Bullet.h"
 
+enum GameplayState { ALIVE, DEAD };
+
 class GameplayScene : public Scene {
 
 public:
@@ -15,11 +17,19 @@ public:
 
 	void Start(SDL_Renderer* rend) override;
 	void Update(float dt) override;
-	void Render(SDL_Renderer* rend) override;
 
 private:
 	Spaceship* spaceship;
 	SDL_Renderer* rend;
+
+	GameplayState currentState;
+
+	int lifes;
+	float currentStateTime;
+	const float stateTimeThreshold = 3.0f;
 	int rounds = 0;
+
+	void DestroySpaceship();
+	void RespawnSpaceship();
 
 };
