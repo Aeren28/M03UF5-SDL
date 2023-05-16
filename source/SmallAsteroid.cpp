@@ -1,12 +1,39 @@
 #include "SmallAsteroid.h"
 
-SmallAsteroid::SmallAsteroid(SDL_Renderer* rend, Vector2 pos, int vel)
+SmallAsteroid::SmallAsteroid(SDL_Renderer* rend, Vector2 pos)
 	: Asteroid(rend) {
 
-	Vector2 randomPosition = Vector2(pos.x + (-10 + rand() % 10), pos.y + (-10 + rand() % 10));
-	position = randomPosition;
-	scale = (scale / 2);
+	int random = rand() % 3;
 
-	velocity = velocity + Vector2(rand() % vel, rand() % vel);
+	switch (random) {
+		case 0:
+			width = 19;
+			height = 18;
+			padding = Vector2(128.0f, 1.f);
+
+			break;
+
+		case 1:
+			width = 19;
+			height = 21;
+			padding = Vector2(128.0f, 22.f);
+
+			break;
+
+		case 2:
+			width = 21;
+			height = 18;
+			padding = Vector2(166.0f, 105.f);
+
+			break;
+
+	}
+
+	position = pos;
+
+	velocity = CalculatePositionInRadius(110);
+	angularVelocity = 110 - (rand() % 221); //Entre -110 y 110
+
+	radius = CalculateRadius(width, height);
 
 }

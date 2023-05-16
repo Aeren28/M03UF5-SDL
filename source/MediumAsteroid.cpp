@@ -1,12 +1,32 @@
 #include "MediumAsteroid.h"
 
-MediumAsteroid::MediumAsteroid(SDL_Renderer* rend, Vector2 pos, int vel)
+MediumAsteroid::MediumAsteroid(SDL_Renderer* rend, Vector2 pos)
 	: Asteroid(rend) {
 
-	Vector2 randomPosition = Vector2(pos.x + (-10 + rand() % 10), pos.y + (-10 + rand() % 10));
-	position = randomPosition;
-	scale = (scale * 2) / 3;
+	int random = rand() % 2;
 
-	velocity = velocity + Vector2(rand() % vel, rand() % vel);
+	switch (random) {
+		case 0:
+			width = 37;
+			height = 36;
+			padding = Vector2(41.0f, 3.f);
+
+			break;
+
+		case 1:
+			width = 43;
+			height = 38;
+			padding = Vector2(81.0f, 3.f);
+
+			break;
+
+	}
+
+	position = pos;
+
+	velocity = CalculatePositionInRadius(70);
+	angularVelocity = 70 - (rand() % 141); //Entre -70 y 70
+
+	radius = CalculateRadius(width, height);
 
 }

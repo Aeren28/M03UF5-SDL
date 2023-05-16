@@ -9,12 +9,8 @@ void GameplayScene::Start(SDL_Renderer* rend) {
 	spaceship = new Spaceship(rend, Vector2(100.f, 100.f), 0.0f, Vector2(1.f, 1.f));
 	objects.push_back(spaceship);
 
-	/*
-	for (int i = 0; i < 10; i++)
-		objects.push_back(new Asteroid(rend));
-	*/
-
-	objects.push_back(new BigAsteroid(rend, 100.0f));
+	for (int i = 0; i < rounds + 2; i++)
+		objects.push_back(new BigAsteroid(rend));
 
 }
 
@@ -37,7 +33,7 @@ void GameplayScene::Update(float dt) {
 		rounds++;
 
 		for (int i = 0; i < rounds + 2; i++) {
-			objects.push_back(new BigAsteroid(rend, 100.0f));
+			objects.push_back(new BigAsteroid(rend));
 
 		}
 
@@ -55,7 +51,8 @@ void GameplayScene::Update(float dt) {
 		if (Asteroid* a = dynamic_cast<BigAsteroid*>(objects[i])) {
 			//CHECK IF ASTEROID HAS TO BE DESTROYED
 			if (a->IsPendingDestroy()) {
-				objects.push_back(new MediumAsteroid(rend, a->GetPosition(), 4));
+				objects.push_back(new MediumAsteroid(rend, a->GetPosition()));
+				objects.push_back(new MediumAsteroid(rend, a->GetPosition()));
 
 			}
 
@@ -64,7 +61,8 @@ void GameplayScene::Update(float dt) {
 		if (Asteroid* a = dynamic_cast<MediumAsteroid*>(objects[i])) {
 			//CHECK IF ASTEROID HAS TO BE DESTROYED
 			if (a->IsPendingDestroy()) {
-				objects.push_back(new SmallAsteroid(rend, a->GetPosition(), 4));
+				objects.push_back(new SmallAsteroid(rend, a->GetPosition()));
+				objects.push_back(new SmallAsteroid(rend, a->GetPosition()));
 
 			}
 

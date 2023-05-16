@@ -4,6 +4,6 @@
 class BigAsteroid : public Asteroid {
 
 public:
-	BigAsteroid(SDL_Renderer* rend, float vel);
-
+	BigAsteroid(SDL_Renderer* rend);
+		
 };
