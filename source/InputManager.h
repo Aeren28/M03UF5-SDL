@@ -33,6 +33,8 @@ public:
 	bool GetLeftClick() { return leftClick; }
 	bool GetQuit() { return quit; }
 
+	void Quit() { quit = true; }
+
 private:
 	
 	InputManager() {

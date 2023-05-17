@@ -17,6 +17,7 @@ public:
 		height = h;
 
 		resourcePath = "resources/button.png";
+		renderer = rend;
 
 		GenerateTexture(rend);
 
@@ -24,6 +25,25 @@ public:
 
 	void Update(float dt) override {}
 	void Render(SDL_Renderer* rend) override;
+
+	bool IsHovering() { return isHovered; }
+
+	void Hover() { isHovered = true; }
+	void IsNotHover() { isHovered = false; }
+
+	Vector2 GetPosition() { return position + padding; }
+
+	int GetWidth() { return width; }
+	int GetHeight() { return height; }
+
+	void ChangeTexture() {
+
+		SDL_DestroyTexture(texture);
+		GenerateTexture(renderer);
+
+	}
+
+	std::string GetText() { return text->GetText(); }
 
 protected:
 

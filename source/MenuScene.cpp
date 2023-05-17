@@ -54,15 +54,60 @@ void MenuScene::Start(SDL_Renderer* rend) {
 void MenuScene::Update(float dt) {
 	Scene::Update(dt); //Parent function
 
-	if (IM.GetKey(SDLK_SPACE, DOWN)) {
-		//Transition code
-		finished = true;
-		targetScene = "Gameplay";
+	for (auto it = uiObjects.begin(); it != uiObjects.end(); it++) {
+
+		if (UIButton* button = dynamic_cast<UIButton*>(*it)) {
+
+			if (CheckPointInsideCenteredRectangle(Vector2(IM.GetMouseX(), 
+				IM.GetMouseY()), 
+				button->GetPosition(), 
+				button->GetWidth(), 
+				button->GetHeight())) {
+
+				if (!button->IsHovering()) {
+
+					button->Hover();
+					button->ChangeTexture();
+
+				}
+
+				if (IM.GetLeftClick()) {
+
+					if (button->GetText() == "GamePlay") {
+
+						finished = true;
+						targetScene = "Gameplay";
+
+					}
+
+					else if (button->GetText() == "HighScores") {
+
+						finished = true;
+						targetScene = "Highscores";
+
+					}
+
+					else if (button->GetText() == "Exit") {
+
+						IM.Quit();
+
+					}
+
+				}
+
+			}
+
+			else
+
+				if (button->IsHovering()) {
+
+					button->IsNotHover();
+					button->ChangeTexture();
+
+				}
+
+		}
+
 	}
 
-	if (IM.GetKey(SDLK_h, DOWN)) {
-		//Transition code
-		finished = true;
-		targetScene = "Highscore";
-	}
 }

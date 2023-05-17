@@ -23,6 +23,8 @@ public:
 		GenerateTexture(rend);
 	}
 
+	std::string GetText() { return text; }
+
 protected:
 	
 	void GenerateTexture(SDL_Renderer* rend) override;
