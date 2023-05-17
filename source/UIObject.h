@@ -17,6 +17,8 @@ public:
 	virtual void Update(float dt) = 0;
 	virtual void Render(SDL_Renderer* rend) = 0;
 
+	SDL_Texture* GetTexture() { return texture; }
+
 protected:
 
 	virtual void GenerateTexture(SDL_Renderer* rend) = 0;

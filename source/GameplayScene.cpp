@@ -8,6 +8,9 @@ void GameplayScene::Start(SDL_Renderer* rend) {
 
 	currentStateTime = 0.0f;
 	lifes = 3;
+
+	rounds = 0;
+	score = 0;
 	
 	Scene::Start(rend);
 	
@@ -19,11 +22,39 @@ void GameplayScene::Start(SDL_Renderer* rend) {
 	uiObjects.push_back(
 		new UIText(
 			rend,
-			Vector2(50, 50), 0.0f, Vector2(1.0f, 1.0f),
+			Vector2(50, 100), 0.0f, Vector2(1.0f, 1.0f),
 			std::to_string(score),
 			"resources/Hyperspace.ttf",
 			{ 0xFF, 0xFF, 0xFF, 0xFF }));
 
+	uiObjects.push_back(
+		new UIImage(
+			rend,
+			Vector2(93, 50), 0.0f, Vector2(1.0f, 1.0f),
+			"resources/asteroids_spritesheet.png",
+			31, 39, Vector2(0, 0)));
+
+	uiObjects.push_back(
+		new UIImage(
+			rend,
+			Vector2(62, 50), 0.0f, Vector2(1.0f, 1.0f),
+			"resources/asteroids_spritesheet.png",
+			31, 39, Vector2(0, 0)));
+
+	uiObjects.push_back(
+		new UIImage(
+			rend,
+			Vector2(31, 50), 0.0f, Vector2(1.0f, 1.0f),
+			"resources/asteroids_spritesheet.png",
+			31, 39, Vector2(0, 0)));
+
+	uiObjects.push_back(
+		new UIText(
+			rend,
+			Vector2(250, 50), 0.0f, Vector2(1.0f, 1.0f),
+			"Round " + std::to_string(rounds + 1),
+			"resources/Hyperspace.ttf",
+			{ 0xFF, 0xFF, 0xFF, 0xFF }));
 }
 
 void GameplayScene::Update(float dt) {
@@ -156,6 +187,10 @@ void GameplayScene::Update(float dt) {
 
 		rounds++;
 
+		UIText* t = dynamic_cast<UIText*>(uiObjects[4]);
+
+		t->ChangeText("Round " + std::to_string(rounds + 1));
+
 		for (int i = 0; i < rounds + 2; i++) {
 
 			objects.push_back(new BigAsteroid(rend));
@@ -187,6 +222,13 @@ void GameplayScene::DestroySpaceship() {
 
 	currentState = GameplayState::DEAD;
 	currentStateTime = 0.0f;
+
+	int lifesId = uiObjects.size() - lifes - 1;
+
+	UIImage* lifeImage = dynamic_cast<UIImage*>(uiObjects[lifesId]);
+	SDL_SetTextureAlphaMod(lifeImage->GetTexture(), 0x7F);
+
+	lifeImage->Render(rend);
 
 	lifes--;
 
