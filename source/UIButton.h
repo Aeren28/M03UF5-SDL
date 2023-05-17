@@ -3,6 +3,8 @@
 #include "UIObject.h"
 #include "UIText.h"
 
+#include <SDL_image.h>
+
 class UIButton : public UIObject {
 
 public:
@@ -13,6 +15,8 @@ public:
 		text = new UIText(rend, pos, rot, scl, txt, path, col);
 		width = w;
 		height = h;
+
+		resourcePath = "resources/button.png";
 
 		GenerateTexture(rend);
 
@@ -28,6 +32,8 @@ protected:
 
 	UIText* text;
 	SDL_Renderer* renderer;
+
+	std::string resourcePath;
 
 	void GenerateTexture(SDL_Renderer* rend) override;
 

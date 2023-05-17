@@ -29,10 +29,26 @@ void MenuScene::Start(SDL_Renderer* rend) {
 	uiObjects.push_back(
 		new UIButton(
 			rend,
-			Vector2(250, 150), 0.0f, Vector2(0.95f, 0.95f), 100, 150,
-			"Play",
+			Vector2(250, 150), 0.0f, Vector2(0.99f, 0.99f), 260, 80,
+			"GamePlay",
 			"resources/Hyperspace.ttf",
 			{ 0xFF, 0xFF, 0x00, 0xFF }));
+
+	uiObjects.push_back(
+		new UIButton(
+			rend,
+			Vector2(250, 200), 0.0f, Vector2(0.99f, 0.99f), 260, 80,
+			"HighScores",
+			"resources/Hyperspace.ttf",
+			{ 0xFF, 0xFF, 0xFF, 0xFF }));
+
+	uiObjects.push_back(
+		new UIButton(
+			rend,
+			Vector2(250, 250), 0.0f, Vector2(0.99f, 0.99f), 260, 80,
+			"Exit",
+			"resources/Hyperspace.ttf",
+			{ 0xFF, 0xFF, 0xFF, 0xFF }));
 }
 
 void MenuScene::Update(float dt) {

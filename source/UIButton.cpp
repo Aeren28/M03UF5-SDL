@@ -22,10 +22,28 @@ void UIButton::Render(SDL_Renderer* rend) {
 
 void UIButton::GenerateTexture(SDL_Renderer* rend) {
 
-	// Color Button
-	SDL_Rect buttonRect{ position.x, position.y, width, height };
+	isHovered ? resourcePath = "resources/button2.png" : resourcePath = "resources/button.png";
 
-	SDL_SetRenderDrawColor(rend, 0xFF, 0x00, 0x00, 0x00);
-	SDL_RenderFillRect(rend, &buttonRect);
+	/// Load texture
+	//SDL_Surface* surf = IMG_Load("resources/asteroids_spritesheet.png");
+	SDL_Surface* surf = IMG_Load(resourcePath.c_str());
+
+	if (surf == nullptr) {
+
+		std::cout << "Cannot load surface: " << SDL_GetError();
+
+	}
+
+	// Generate texture
+	texture = SDL_CreateTextureFromSurface(rend, surf);
+
+	if (texture == nullptr) {
+
+		std::cout << "Cannot load texture: " << SDL_GetError();
+
+	}
+
+	// Deleting surface
+	SDL_FreeSurface(surf);
 
 }
