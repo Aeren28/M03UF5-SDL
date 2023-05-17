@@ -78,6 +78,9 @@
     <ClCompile Include="source\UIText.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="source\UIButton.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Vector2.h">
@@ -132,6 +135,9 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="source\UIText.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIButton.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>

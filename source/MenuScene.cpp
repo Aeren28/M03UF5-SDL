@@ -5,23 +5,34 @@ void MenuScene::Start(SDL_Renderer* rend) {
 	uiObjects.push_back(
 		new UIText(
 			rend,
-			Vector2(250, 200), 0.0f, Vector2(1.f, 1.f),
+			Vector2(250, 50), 0.0f, Vector2(1.5f, 1.5f),
 			"ASTEROIDS",
-			"resources/Hyperspace.ttf"));
+			"resources/Hyperspace.ttf",
+			{ 0xFF, 0xFF, 0x00, 0xFF }));
 
 	uiObjects.push_back(
 		new UIText(
 			rend,
-			Vector2(250, 400), 0.0f, Vector2(1.f, 1.f),
+			Vector2(250, 400), 0.0f, Vector2(0.9f, 0.9f),
 			"Hugo Cifuentes",
-			"resources/Hyperspace.ttf"));
+			"resources/Hyperspace.ttf",
+			{ 0xFF, 0xFF, 0x00, 0xFF }));
 
 	uiObjects.push_back(
 		new UIText(
 			rend,
-			Vector2(250, 450), 0.0f, Vector2(1.f, 1.f),
+			Vector2(250, 450), 0.0f, Vector2(0.9f, 0.9f),
 			"Nerea Fernández",
-			"resources/Hyperspace.ttf"));
+			"resources/Hyperspace.ttf",
+			{ 0xFF, 0xFF, 0x00, 0xFF }));
+
+	uiObjects.push_back(
+		new UIButton(
+			rend,
+			Vector2(250, 150), 0.0f, Vector2(0.95f, 0.95f), 100, 150,
+			"Play",
+			"resources/Hyperspace.ttf",
+			{ 0xFF, 0xFF, 0x00, 0xFF }));
 }
 
 void MenuScene::Update(float dt) {

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Scena.h"
 
 class HighscoreScene : public Scene {
