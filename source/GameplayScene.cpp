@@ -16,6 +16,14 @@ void GameplayScene::Start(SDL_Renderer* rend) {
 	for (int i = 0; i < rounds + 2; i++)
 		objects.push_back(new BigAsteroid(rend));
 
+	uiObjects.push_back(
+		new UIText(
+			rend,
+			Vector2(50, 50), 0.0f, Vector2(1.0f, 1.0f),
+			std::to_string(score),
+			"resources/Hyperspace.ttf",
+			{ 0xFF, 0xFF, 0xFF, 0xFF }));
+
 }
 
 void GameplayScene::Update(float dt) {
@@ -91,6 +99,11 @@ void GameplayScene::Update(float dt) {
 					if (distanceSquared < squareRadiusSum) {
 						b->Destroy();
 						a->Destroy();
+
+						score += a->GetScore();
+
+						UIText* t = dynamic_cast<UIText*>(uiObjects[0]);
+						t->ChangeText(std::to_string(score));
 
 					}
 

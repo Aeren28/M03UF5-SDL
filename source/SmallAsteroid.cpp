@@ -36,4 +36,6 @@ SmallAsteroid::SmallAsteroid(SDL_Renderer* rend, Vector2 pos)
 
 	radius = CalculateRadius(width, height);
 
+	score = 20;
+
 }

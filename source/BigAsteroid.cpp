@@ -34,4 +34,6 @@ BigAsteroid::BigAsteroid(SDL_Renderer* rend)
 
 	radius = CalculateRadius(width, height);
 
+	score = 50;
+
 }
