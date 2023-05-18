@@ -173,6 +173,17 @@ void GameplayScene::Update(float dt) {
 
 	}
 
+	//Particles Spawn
+	if (particlesSpawn.size() > 0) {
+
+		objects.push_back(particlesSpawn[0]);
+		objects.push_back(particlesSpawn[1]);
+		objects.push_back(particlesSpawn[2]);
+
+		particlesSpawn.clear();
+
+	}
+
 	// BULLET SPAWN
 	if (spaceship != nullptr) {
 
@@ -217,6 +228,11 @@ void GameplayScene::Update(float dt) {
 
 void GameplayScene::DestroySpaceship() {
 
+	//Particles
+	particlesSpawn.push_back(new DeathParticles(rend, spaceship->GetPosition()));
+	particlesSpawn.push_back(new DeathParticles(rend, spaceship->GetPosition()));
+	particlesSpawn.push_back(new DeathParticles(rend, spaceship->GetPosition()));
+
 	spaceship->Destroy();
 	spaceship = nullptr;
 
@@ -235,6 +251,14 @@ void GameplayScene::DestroySpaceship() {
 }
 
 void GameplayScene::RespawnSpaceship() {
+
+	for (int i = objects.size() - 1; i >= 0; i--) {
+
+		if (DeathParticles* dp = dynamic_cast<DeathParticles*>(objects[i]))
+
+			dp->Destroy();
+
+	}
 
 	spaceship = new Spaceship(rend, Vector2(GAME_WIDTH / 2.0f, GAME_HEIGHT / 2.0f), 0.0f, Vector2(1.0f, 1.0f));
 	

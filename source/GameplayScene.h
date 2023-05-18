@@ -2,6 +2,7 @@
 
 #include "Scena.h"
 #include "Spaceship.h"
+#include "DeathParticles.h"
 
 #include "Bullet.h"
 
@@ -36,6 +37,8 @@ private:
 
 	int rounds = 0;
 	int score = 0;
+
+	std::vector<DeathParticles*> particlesSpawn;
 
 	void DestroySpaceship();
 	void RespawnSpaceship();
